@@ -31,6 +31,7 @@ set noswapfile
 set ignorecase
 set smartcase
 set hlsearch
+set showmatch           " highlight matching [{()}]
 
 "
 set wildmenu
