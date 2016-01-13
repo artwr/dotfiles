@@ -1,7 +1,7 @@
 . `brew --prefix`/etc/profile.d/z.sh
 
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+# export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
 export JAVA7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
 export JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home
@@ -58,3 +58,29 @@ fi
 source ~/.profile
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export PATH="$PATH:/usr/local/bin:/usr/local/games/bin:/Users/Arthur/bin"
+
+# ALIASES
+# To create a new project without having to close the one currently open
+alias newrstudio='open -n /Applications/RStudio.app/'
+# mvim
+# alias vim="mvim -v"
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# Haskell
+export PATH="$HOME/Library/Haskell/bin:$PATH"
+
+# Scala
+export SCALA_HOME="/usr/local/share/scala"
+export PATH="$PATH:$SCALA_HOME/bin"
+
+#export CLICOLOR=1
+#export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# Go
+export GOPATH=~/Code/go
+
