@@ -58,11 +58,13 @@
 .z
 Applications/*
 Box*
+Calibre*
 Code/*
 Desktop/*
 Documents/*
 Downloads/*
 Dropbox/*
+Google Drive/*
 GoogleDriveShared/*
 Library/*
 Movies/*
