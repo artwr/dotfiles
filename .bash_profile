@@ -50,11 +50,51 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-if [ -e ~/.bash_profile_private ] 
+# cd ../*dirname*
+# cd ../../*dirname*
+# cd ../../../*dirname*
+# All the way to the root dir.
+function over {
+  if [ $1 ]
+  then
+    olddir=$PWD
+    while [ $PWD != '/' ]; do
+      cd ..
+      for dir in `find . -maxdepth 1 -type d -name "*$1*"`; do
+        cd $dir
+        break 2
+      done
+    done
+    if [ $PWD == '/' ]; then
+      echo $1: not found
+      cd $olddir
+    fi
+  else
+    echo "usage: over partial-dir-name"
+  fi
+}
+
+
+
+if [ -e ~/.bash_profile_private ]
 then
   source ~/.bash_profile_private
 fi
 
 source ~/.profile
 
+start_agent(){
+    get_vars="$(ssh-agent -s)";
+    echo $get_vars > ~/.current_agent.sh
+    source ~/.current_agent.sh
+}
+
+source ~/.current_agent.sh
+
+cag(){
+    source ~/.current_agent.sh
+}
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
