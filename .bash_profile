@@ -1,12 +1,24 @@
 . `brew --prefix`/etc/profile.d/z.sh
 
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
 export JAVA7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
 export JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home
 export JAVA_HOME=$JAVA8_HOME
 export PATH=$JAVA_HOME/bin:$PATH
+
+
+export PATH="$PATH:/usr/local/bin:/usr/local/games/bin:/Users/Arthur/bin"
+
+# Haskell
+export PATH="$HOME/Library/Haskell/bin:$PATH"
+
+# Scala
+export SCALA_HOME="/usr/local/share/scala"
+export PATH="$PATH:$SCALA_HOME/bin"
+
+# Go
+export GOPATH=~/Code/go
 
 
 # Aliases
@@ -23,6 +35,9 @@ alias be='bundle exec'
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
+# RStudio CLI
+alias newrstudio='open -n /Applications/RStudio.app/'
+
 
 source /usr/local/etc/bash_completion.d/git-completion.bash
 source /usr/local/etc/bash_completion.d/git-prompt.sh
@@ -30,6 +45,8 @@ source /usr/local/etc/bash_completion.d/git-prompt.sh
 export PS1="\[\033[01;32m\]\d \t \w\$(__git_ps1) \[\033[00m\]\$ "
 export CLICOLOR=1
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+#export CLICOLOR=1
+#export LSCOLORS=ExFxBxDxCxegedabagacad
 
 #Virtualenv wrapper setup
 export WORKON_HOME=$HOME/.virtualenvs
@@ -75,13 +92,15 @@ function over {
 }
 
 
-
+# bash profile perso
 if [ -e ~/.bash_profile_private ]
 then
   source ~/.bash_profile_private
 fi
 
 source ~/.profile
+
+# SSH agent multiple windows
 
 start_agent(){
     get_vars="$(ssh-agent -s)";
@@ -95,6 +114,7 @@ cag(){
     source ~/.current_agent.sh
 }
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
