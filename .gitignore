@@ -15,6 +15,7 @@
 .codeintel/
 .config/
 .cups/
+.current_agent.sh
 .currentairflowignore
 .dropbox/
 .eclipse/
@@ -43,11 +44,13 @@
 .perso/
 .pip/
 .pry_history
+.python_history
 .python-eggs/
 .rnd
 .rstudio-desktop/
 .rvm/
 .s3cfg
+.sqlite_history
 .sqlworkbench/
 .ssh/
 .subversion/
@@ -73,6 +76,8 @@ Pictures/*
 Public/*
 VirtualBox*
 Virtualenvs/
+airlab/*
+airflow/*
 *s3cmd.conf
 bin/
 bkp*
@@ -83,5 +88,6 @@ proxy.pac
 s3*
 svg*
 test*
+tmp*
 wfm*
 zendesk*
