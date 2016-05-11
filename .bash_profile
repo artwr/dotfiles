@@ -58,6 +58,8 @@ fi
 source ~/.profile
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+eval "$(rbenv init -)"
+
 
 export PATH="$PATH:/usr/local/bin:/usr/local/games/bin:/Users/Arthur/bin"
 
