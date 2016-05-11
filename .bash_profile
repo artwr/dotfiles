@@ -3,7 +3,7 @@
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 export JAVA7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
-export JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home
+export JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home
 export JAVA_HOME=$JAVA8_HOME
 export PATH=$JAVA_HOME/bin:$PATH
 

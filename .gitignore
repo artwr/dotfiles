@@ -4,6 +4,7 @@
 .R/
 .Rhistory
 .Xauthority
+.appletviewer
 .atom/
 .aws/
 .bash_eternal_history
@@ -17,8 +18,11 @@
 .cups/
 .current_agent.sh
 .currentairflowignore
+.data_science_cache/
+.docker/
 .dropbox/
 .eclipse/
+.emacs.d/
 .flexlmrc
 .floorc.json
 .gem/
@@ -27,8 +31,11 @@
 .gitignore_global
 .gnupg/
 .grip/
+.homebrew_analytics_user_uuid
 .ipython/
 .irb-history
+.iterm2_shell_integration.bash
+.ivy2/
 .jupyter/
 .lesshst
 .local/
@@ -36,6 +43,7 @@
 .matplotlib/
 .mkshrc
 .mysql_history
+.my.cnf
 .npm/
 .oh-my-zsh/
 .old_boto
@@ -50,10 +58,13 @@
 .rstudio-desktop/
 .rvm/
 .s3cfg
+.sbt/
+.scala_history
 .sqlite_history
 .sqlworkbench/
 .ssh/
 .subversion/
+.Trash/
 .vagrant.d/
 .vim/*
 .viminfo*
@@ -76,8 +87,10 @@ Pictures/*
 Public/*
 VirtualBox*
 Virtualenvs/
+airbnb_font/
 airlab/*
 airflow/*
+mysql_var/*
 *s3cmd.conf
 bin/
 bkp*
@@ -85,6 +98,8 @@ bkp*
 *.log
 kmpanlhcadenhinhhdnljbdnkemeaeei*
 proxy.pac
+qr_code.png
+qrcode.png
 s3*
 svg*
 test*
