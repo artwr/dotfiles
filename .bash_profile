@@ -25,6 +25,8 @@ export GOPATH=~/Code/go
 alias less='less -R'
 alias ll='ls -lH'
 
+alias brewski='brew update && brew upgrade --all && brew upgrade brew-cask; brew cleanup; brew cask cleanup; brew doctor'
+
 # SSH
 alias findtunnel='ps aux | grep ssh'
 
@@ -65,7 +67,8 @@ export HISTTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND='history -a; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+
 
 # cd ../*dirname*
 # cd ../../*dirname*
@@ -91,18 +94,26 @@ function over {
   fi
 }
 
+function sourceifexists {
+  if [ $1 ]
+  then
+    if [ -e $1 ]
+    then
+    source $1
+    fi
+  else
+    echo "usage: sourceifexists path/to/file"
+  fi
+}
 
-# bash profile perso
-if [ -e ~/.bash_profile_private ]
-then
-  source ~/.bash_profile_private
-fi
-
-source ~/.profile
+sourceifexists ~/.bash_profile_private
+sourceifexists ~/.bashrc
+sourceifexists ~/.profile
 
 # SSH agent multiple windows
 
 start_agent(){
+    killall ssh-agent
     get_vars="$(ssh-agent -s)";
     echo $get_vars > ~/.current_agent.sh
     source ~/.current_agent.sh
@@ -118,4 +129,4 @@ cag(){
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
