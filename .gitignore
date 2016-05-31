@@ -32,6 +32,7 @@
 .gnupg/
 .grip/
 .homebrew_analytics_user_uuid
+.idea-*
 .ipython/
 .irb-history
 .iterm2_shell_integration.bash
@@ -52,6 +53,7 @@
 .perso/
 .pip/
 .pry_history
+.pylint.d/*
 .python_history
 .python-eggs/
 .rnd
