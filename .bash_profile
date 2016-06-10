@@ -112,19 +112,18 @@ sourceifexists ~/.profile
 
 # SSH agent multiple windows
 
-start_agent(){
+function start_agent(){
     killall ssh-agent
-    get_vars="$(ssh-agent -s)";
+    get_vars="$(ssh-agent -s)"
     echo $get_vars > ~/.current_agent.sh
     source ~/.current_agent.sh
 }
 
-source ~/.current_agent.sh
-
-cag(){
+function cag(){
     source ~/.current_agent.sh
 }
 
+test -e ~/.current_agent.sh && source ~/.current_agent.sh || start_agent
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
