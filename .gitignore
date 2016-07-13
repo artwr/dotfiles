@@ -35,6 +35,7 @@
 .idea-*
 .ipython/
 .irb-history
+.iterm2/*
 .iterm2_shell_integration.bash
 .ivy2/
 .jupyter/
@@ -72,6 +73,8 @@
 .viminfo*
 .virtualenvs/*
 .z
+.zcompdump*
+.zsh-update
 Applications/*
 Box*
 Calibre*
