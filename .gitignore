@@ -4,6 +4,7 @@
 .R/
 .Rhistory
 .Xauthority
+.airpy/
 .appletviewer
 .atom/
 .aws/
@@ -30,6 +31,7 @@
 .gitconfig
 .gitignore_global
 .gnupg/
+.gradle/
 .grip/
 .homebrew_analytics_user_uuid
 .idea-*
@@ -57,6 +59,7 @@
 .pylint.d/*
 .python_history
 .python-eggs/
+.pythonhist
 .rnd
 .rstudio-desktop/
 .rvm/
