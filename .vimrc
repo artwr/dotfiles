@@ -46,7 +46,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'altercation/vim-colors-solarized'
 
 Plug 'airblade/vim-gitgutter'
+Plug 'tmhedberg/SimpylFold'
 
+Plug 'Valloric/YouCompleteMe'
+Plug 'wincent/command-t'
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
@@ -57,11 +61,7 @@ call plug#end()
 syntax on
 filetype plugin indent on
 
-" Remapping
-inoremap jj <ESC>
-
 let mapleader = "\<Space>"
-
 
 " Colors
 set background=dark
@@ -104,6 +104,10 @@ function! StripWhitespace ()
 endfunction
 map ,s :call StripWhitespace ()<CR>
 
+if exists('+colorcolumn')
+    set colorcolumn=+1 " vertical line at `textwidth` characters
+endif
+
 " ---------------------------------------------------------------------------
 " File Types
 " ---------------------------------------------------------------------------
@@ -116,6 +120,9 @@ endif
 au BufWritePre *.py :%s/\s\+$//e
 au BufWritePre *.yaml :%s/\s\+$//e
 
+au BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+au BufWinLeave *.py setlocal foldexpr< foldmethod<
+
 au BufRead,BufNewFile *.hql        set filetype=sql
 au BufRead,BufNewFile *.haml       set ft=haml
 au BufRead,BufNewFile *.md         set ft=markdown tw=80 ts=2 sw=2 expandtab
@@ -125,12 +132,38 @@ au BufRead,BufNewFile *.go         set ts=4 sw=4 sts=0 noexpandtab
 au Filetype gitcommit set tw=68  spell
 au Filetype ruby      set tw=80  ts=2 sw=2 sts=0
 
-if exists('+colorcolumn')
-    set colorcolumn=+1 " vertical line at `textwidth` characters
-endif
+" ------------------------------------------
+" Key Mapping
+" -----------------------------------------
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Escaping insert mode with jj 
+inoremap jj <ESC>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=16
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" ------------------------------------
+" Plugins Config
+" -----------------------------------
+
+" ctrlp
+let g:ctrlp_lazy_update = 100 "Only refreshes the results every 100ms or so
+let g:ctrlp_user_command = 'find %s -type f | egrep -iv "(\.(eot|gif|gz|ico|jpg|jpeg|otf|png|psd|pyc|svg|ttf|woff|zip)$)|(/\.)|((^|\/)tmp\/)"' "Quicker indexing
 
 
-
+" Fugitive
+set diffopt+=iwhite
+let g:fugitive_github_domains = ['github.com', 'git.musta.ch']
 
 " air-line
 let g:airline_powerline_fonts = 1
@@ -178,5 +211,22 @@ let g:NERDCompactSexyComs = 1
 
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+
+" See docstrings of folded code
+let g:SimpylFold_docstring_preview = 1
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 

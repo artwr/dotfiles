@@ -48,6 +48,7 @@
 .mkshrc
 .mysql_history
 .my.cnf
+.netrc
 .npm/
 .oh-my-zsh/
 .old_boto

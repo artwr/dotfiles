@@ -1,21 +1,35 @@
 . `brew --prefix`/etc/profile.d/z.sh
 
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+pathappend() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
+pathprepend() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$1${PATH:+":$PATH"}"
+    fi
+}
+
+
+pathprepend "/usr/local/sbin"
+pathprepend "/usr/local/bin"
 
 export JAVA7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
 export JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home
 export JAVA_HOME=$JAVA8_HOME
-export PATH=$JAVA_HOME/bin:$PATH
+pathappend $JAVA_HOME/bin
 
 
-export PATH="$PATH:/usr/local/bin:/usr/local/games/bin:/Users/Arthur/bin"
+pathappend $HOME/bin
 
 # Haskell
-export PATH="$HOME/Library/Haskell/bin:$PATH"
+pathappend $HOME/Library/Haskell/bin
 
 # Scala
 export SCALA_HOME="/usr/local/share/scala"
-export PATH="$PATH:$SCALA_HOME/bin"
+pathappend $SCALA_HOME/bin
 
 # Go
 export GOPATH=~/Code/go
@@ -90,9 +104,9 @@ fi
 # PROMPT_TITLE='echo -ne "\033]0;${USER}@$mbp:${PWD/#$HOME/~}\007"'
 # export PROMPT_COMMAND="${PROMPT_COMMAND} ${PROMPT_TITLE}; "
 
-function title {
-    echo -ne "\033]0;"$*"\007"
-}
+#function title {
+#    echo -ne "\033]0;"$*"\007"
+#}
 
 #Virtualenv wrapper setup
 export WORKON_HOME=$HOME/.virtualenvs
@@ -138,18 +152,6 @@ function over {
   fi
 }
 
-function sourceifexists {
-  if [ $1 ]
-  then
-    if [ -e $1 ]
-    then
-    source $1
-    fi
-  else
-    echo "usage: sourceifexists path/to/file"
-  fi
-}
-
 sourceifexists ~/.bash_profile_private
 sourceifexists ~/.bashrc
 sourceifexists ~/.profile
@@ -157,15 +159,6 @@ sourceifexists ~/.profile
 # SSH agent multiple windows
 
 export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
-
-#function start_agent(){
-#    killall ssh-agent 2> /dev/null
-#    get_vars="$(ssh-agent -s)"
-#    echo $get_vars > ~/.current_agent.sh
-#    source ~/.current_agent.sh
-#}
-#
-#test -e ~/.current_agent.sh && source ~/.current_agent.sh || start_agent
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
