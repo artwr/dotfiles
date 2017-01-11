@@ -16,9 +16,8 @@ pathprepend() {
 pathprepend "/usr/local/sbin"
 pathprepend "/usr/local/bin"
 
-export JAVA7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
-export JAVA8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home
-export JAVA_HOME=$JAVA8_HOME
+export JAVA8_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$(/usr/libexec/java_home)
 pathappend $JAVA_HOME/bin
 
 
@@ -30,10 +29,6 @@ pathappend $HOME/Library/Haskell/bin
 # Scala
 export SCALA_HOME="/usr/local/share/scala"
 pathappend $SCALA_HOME/bin
-
-# Go
-export GOPATH=~/Code/go
-
 
 # Aliases
 alias less='less -R'

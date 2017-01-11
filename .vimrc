@@ -51,6 +51,7 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'Valloric/YouCompleteMe'
 Plug 'wincent/command-t'
 Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 call plug#end()
 
@@ -218,6 +219,9 @@ let g:SimpylFold_docstring_preview = 1
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Fuzzy Search
+set rtp+=~/.fzf
 
 "python with virtualenv support
 py << EOF
