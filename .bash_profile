@@ -23,6 +23,8 @@ pathappend $JAVA_HOME/bin
 
 pathappend $HOME/bin
 
+export PATH=$HOME/.local/bin:$PATH
+
 # Haskell
 pathappend $HOME/Library/Haskell/bin
 
@@ -153,9 +155,7 @@ sourceifexists ~/.profile
 
 # SSH agent multiple windows
 
-export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
 
 # iTerm2 tab titles
 function title {
