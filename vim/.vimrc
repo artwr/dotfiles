@@ -38,7 +38,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
 
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -55,10 +56,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 call plug#end()
 
-
-
-" execute pathogen#infect()
-" execute pathogen#helptags()
 syntax on
 filetype plugin indent on
 

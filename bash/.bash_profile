@@ -1,5 +1,10 @@
 . `brew --prefix`/etc/profile.d/z.sh
 
+alias vi=/usr/local/bin/vim
+alias vim=/usr/local/bin/vim
+export EDITOR=/usr/local/bin/vim
+
+
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="${PATH:+"$PATH:"}$1"
@@ -96,12 +101,6 @@ fi
 # see: stackoverflow.com/questions/1371261/get-current-directory-name-without-full-path-in-bash-script
 # then we append the rest of $PROMPT_COMMAND so as not to remove what was already there
 # voilà!
-
-
-#Virtualenv wrapper setup
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Code
-source /usr/local/bin/virtualenvwrapper.sh
 
 # Eternal bash history.
 # ---------------------

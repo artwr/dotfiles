@@ -114,6 +114,7 @@ svg*
 target/*
 test*
 tmp*
+vim/.vim/plugged
 wfm*
 zendesk*
 NetBeansProjects/*
