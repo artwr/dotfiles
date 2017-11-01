@@ -98,13 +98,6 @@ fi
 # voilà!
 
 
-# PROMPT_TITLE='echo -ne "\033]0;${USER}@$mbp:${PWD/#$HOME/~}\007"'
-# export PROMPT_COMMAND="${PROMPT_COMMAND} ${PROMPT_TITLE}; "
-
-#function title {
-#    echo -ne "\033]0;"$*"\007"
-#}
-
 #Virtualenv wrapper setup
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Code
@@ -154,19 +147,8 @@ sourceifexists ~/.bashrc
 sourceifexists ~/.profile
 
 # SSH agent multiple windows
-
 # export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
 
-# iTerm2 tab titles
-function title {
-    if [ "$1" ]
-    then
-        export PROMPT_COMMAND='iterm2_preexec_invoke_cmd'
-        echo -ne "\033]0;${*}\007"
-    else
-        export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007";iterm2_preexec_invoke_cmd'
-    fi
-}
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export BYOBU_PREFIX=/usr/local
