@@ -41,7 +41,7 @@ pathappend $SCALA_HOME/bin
 alias less='less -R'
 alias ll='ls -lH'
 
-alias brewski='brew update && brew upgrade --all && brew upgrade brew-cask; brew cleanup; brew cask cleanup; brew doctor'
+alias brewski='brew update && brew upgrade; brew cleanup; brew cask cleanup; brew doctor'
 
 # SSH
 alias findtunnel='ps aux | grep ssh'
@@ -76,7 +76,7 @@ fi
 sourceifexists /usr/local/etc/bash_completion.d/git-completion.bash
 sourceifexists /usr/local/etc/bash_completion.d/git-prompt.sh
 
-export PS1="\[\033[01;32m\]\d \t \w\$(__git_ps1) \[\033[00m\]\$ "
+export PS1="\[\033[01;32m\]\A \[\033[38;5;12m\]\w\[\033[01;32m\]\$(__git_ps1)\[\033[00m\]\$ "
 export CLICOLOR=1
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 #export CLICOLOR=1
