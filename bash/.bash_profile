@@ -76,11 +76,16 @@ fi
 sourceifexists /usr/local/etc/bash_completion.d/git-completion.bash
 sourceifexists /usr/local/etc/bash_completion.d/git-prompt.sh
 
-export PS1="\[\033[01;32m\]\A \[\033[38;5;12m\]\w\[\033[01;32m\]\$(__git_ps1)\[\033[00m\]\$ "
+if declare -f __git_ps1 > /dev/null; then
+  export PS1="\[\033[01;32m\]\A \[\033[38;5;12m\]\w\[\033[01;32m\]\$(__git_ps1)\[\033[00m\]\$ "
+else
+  export PS1="\[\033[01;32m\]\A \[\033[38;5;12m\]\w\[\033[01;32m\]\\[\033[00m\]\$ "
+fi
+
 export CLICOLOR=1
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-#export CLICOLOR=1
-#export LSCOLORS=ExFxBxDxCxegedabagacad
+#export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+#export LSCOLORS=dxfxcxdxbxegedabagacad
+export LSCOLORS="ExFxBxDxCxegedabagacad"
 
 # put this in your .bash_profile
 if [ $ITERM_SESSION_ID ]; then
@@ -140,6 +145,16 @@ function over {
     echo "usage: over partial-dir-name"
   fi
 }
+
+function lbv() {
+    vim ~/Code/notes/logs/$(date '+%Y-%m-%d').md
+}
+
+
+function lbs() {
+    subl ~/Code/notes/logs/$(date '+%Y-%m-%d').md
+}
+
 
 sourceifexists ~/.bash_profile_private
 sourceifexists ~/.bashrc
