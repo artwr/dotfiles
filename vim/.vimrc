@@ -141,7 +141,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Escaping insert mode with jj 
-inoremap jj <ESC>
+" inoremap jj <ESC>
 
 " Enable folding
 set foldmethod=indent

@@ -69,12 +69,11 @@ function sourceifexists {
   fi
 }
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-fi
+# Enable bash-completion. Run 'brew install bash-completion' first
+[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
-sourceifexists /usr/local/etc/bash_completion.d/git-completion.bash
-sourceifexists /usr/local/etc/bash_completion.d/git-prompt.sh
+#sourceifexists /usr/local/etc/bash_completion.d/git-completion.bash
+#sourceifexists /usr/local/etc/bash_completion.d/git-prompt.sh
 
 if declare -f __git_ps1 > /dev/null; then
   export PS1="\[\033[01;32m\]\A \[\033[38;5;12m\]\w\[\033[01;32m\]\$(__git_ps1)\[\033[00m\]\$ "
