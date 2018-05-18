@@ -3,7 +3,7 @@
 alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
 export EDITOR=/usr/local/bin/vim
-
+alias gradlew='$HOME/Projects/stash/NEBULA/wrapper/gradlew'
 
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -30,9 +30,6 @@ pathappend $HOME/bin
 
 export PATH=$HOME/.local/bin:$PATH
 
-# Haskell
-pathappend $HOME/Library/Haskell/bin
-
 # Scala
 export SCALA_HOME="/usr/local/share/scala"
 pathappend $SCALA_HOME/bin
@@ -41,13 +38,10 @@ pathappend $SCALA_HOME/bin
 alias less='less -R'
 alias ll='ls -lH'
 
-alias brewski='brew update && brew upgrade; brew cleanup; brew cask cleanup; brew doctor'
+alias brewski='brew update && brew upgrade; brew cleanup; brew doctor'
 
 # SSH
 alias findtunnel='ps aux | grep ssh'
-
-# Ruby
-alias be='bundle exec'
 
 # OSX
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
@@ -72,24 +66,63 @@ function sourceifexists {
 # Enable bash-completion. Run 'brew install bash-completion' first
 [ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
-#sourceifexists /usr/local/etc/bash_completion.d/git-completion.bash
-#sourceifexists /usr/local/etc/bash_completion.d/git-prompt.sh
-
-if declare -f __git_ps1 > /dev/null; then
-  export PS1="\[\033[01;32m\]\A \[\033[38;5;12m\]\w\[\033[01;32m\]\$(__git_ps1)\[\033[00m\]\$ "
-else
-  export PS1="\[\033[01;32m\]\A \[\033[38;5;12m\]\w\[\033[01;32m\]\\[\033[00m\]\$ "
-fi
-
 export CLICOLOR=1
 #export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 #export LSCOLORS=dxfxcxdxbxegedabagacad
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 
-# put this in your .bash_profile
-if [ $ITERM_SESSION_ID ]; then
-      export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
-fi
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+
+
+# Set iTerm2 tab titles
+function tabTitle() { echo -ne "\033]0;"$*"\007"; }
+
+function cd() { builtin cd "$@"; tabTitle ${PWD##*/}; }
+
+function prompt_command() {
+    if [ $? -eq 0 ]; then # set an error string for the prompt, if applicable
+        ERRPROMPT=" "
+    else
+        ERRPROMPT='->($?) '
+    fi
+    if [ "$(type -t __git_ps1)" ]; then # if we're in a Git repo, show current branch
+        BRANCH="\$(__git_ps1)"
+    else
+        BRANCH=''
+    fi
+    if [ -z ${VIRTUAL_ENV+x} ]; then
+        # Not in a virtual env
+        VENVSTR=''
+    else
+        VENVSTR="(${VIRTUAL_ENV##*/}) "
+    fi
+
+    # Force prompt to write history after every command.
+    # http://superuser.com/questions/20900/bash-history-loss
+    history -a
+    if [ "$(id -u)" -ne 0 ]; then 
+        echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log 
+    fi
+    if [ $ITERM_SESSION_ID ]; then
+        tabTitle ${PWD##*/};
+    fi
+    local GREEN="\[\033[01;32m\]"
+    local BLUE="\[\033[38;5;12m\]"
+    local WHITE="\[\033[00m\]"
+    local RED="\[\033[31m\]"
+    export PS1="${WHITE}${VENVSTR}${GREEN}\A ${BLUE}\w${GREEN}${BRANCH}${RED}${ERRPROMPT}${WHITE}\$ "
+}
+
+export PROMPT_COMMAND=prompt_command
 
 # Piece-by-Piece Explanation:
 # the if condition makes sure we only screw with $PROMPT_COMMAND if we're in an iTerm environment
@@ -106,19 +139,9 @@ fi
 # then we append the rest of $PROMPT_COMMAND so as not to remove what was already there
 # voilà!
 
-# Eternal bash history.
-# ---------------------
-# Undocumented feature which sets the size to "unlimited".
-# http://stackoverflow.com/questions/9457233/unlimited-bash-history
-export HISTFILESIZE=
-export HISTSIZE=
-export HISTTIMEFORMAT="[%F %T] "
-# Change the file location because certain bash sessions truncate .bash_history file upon close.
-# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE=~/.bash_eternal_history
-# Force prompt to write history after every command.
-# http://superuser.com/questions/20900/bash-history-loss
-export PROMPT_COMMAND='history -a; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+
+
+
 
 
 # cd ../*dirname*
@@ -146,11 +169,13 @@ function over {
 }
 
 function lbv() {
+    mkdir -p ~/Code/notes/logs
     vim ~/Code/notes/logs/$(date '+%Y-%m-%d').md
 }
 
 
 function lbs() {
+    mkdir -p ~/Code/notes/logs
     subl ~/Code/notes/logs/$(date '+%Y-%m-%d').md
 }
 
@@ -158,10 +183,6 @@ function lbs() {
 sourceifexists ~/.bash_profile_private
 sourceifexists ~/.bashrc
 sourceifexists ~/.profile
-
-# SSH agent multiple windows
-# export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
-
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export BYOBU_PREFIX=/usr/local
