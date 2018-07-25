@@ -61,6 +61,12 @@ obj.defaultHotkeys = {
    top_right    = { {"ctrl",        "cmd"}, "2" },
    bottom_left  = { {"ctrl",        "cmd"}, "3" },
    bottom_right = { {"ctrl",        "cmd"}, "4" },
+   top_left3     = { {"ctrl",        "cmd"}, "5" },
+   top_center3   = { {"ctrl",        "cmd"}, "6" },
+   top_right3    = { {"ctrl",        "cmd"}, "7" },
+   bottom_left3  = { {"ctrl",        "cmd"}, "8" },
+   bottom_center3= { {"ctrl",        "cmd"}, "9" },
+   bottom_right3 = { {"ctrl",        "cmd"}, "0" },
    max_toggle   = { {"ctrl", "alt", "cmd"}, "f" },
    max          = { {"ctrl", "alt", "cmd"}, "Up" },
    undo         = { {        "alt", "cmd"}, "z" },
@@ -113,6 +119,12 @@ obj._window_state_name_to_rect = {
    top_right      = {0.50,0.00,0.50,0.50},
    bottom_left    = {0.00,0.50,0.50,0.50},
    bottom_right   = {0.50,0.50,0.50,0.50},
+   top_left3      = {0.00,0.00,0.33,0.50},
+   top_center3    = {0.33,0.00,0.33,0.50},
+   top_right3     = {0.67,0.00,0.33,0.50},
+   bottom_left3   = {0.00,0.50,0.33,0.50},
+   bottom_center3 = {0.33,0.50,0.33,0.50},
+   bottom_right3  = {0.67,0.50,0.33,0.50},
    max            = {0.00,0.00,1.00,1.00},
 }
 
@@ -157,6 +169,12 @@ obj._window_moves = {
    top_right = {"top_right"},
    bottom_left = {"bottom_left"},
    bottom_right = {"bottom_right"},
+   top_left3 = {"top_left3"},
+   top_center3 = {"top_center3"},
+   top_right3 = {"top_right3"},
+   bottom_left3 = {"bottom_left3"},
+   bottom_center3 = {"bottom_center3"},
+   bottom_right3 = {"bottom_right3"},
    max = {"max"},
 }
 
@@ -284,6 +302,12 @@ obj.topLeft        = hs.fnutils.partial(obj.resizeCurrentWindow, "top_left")
 obj.topRight       = hs.fnutils.partial(obj.resizeCurrentWindow, "top_right")
 obj.bottomLeft     = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_left")
 obj.bottomRight    = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_right")
+obj.topLeft3       = hs.fnutils.partial(obj.resizeCurrentWindow, "top_left3")
+obj.topCenter3     = hs.fnutils.partial(obj.resizeCurrentWindow, "top_center3")
+obj.topRight3      = hs.fnutils.partial(obj.resizeCurrentWindow, "top_right3")
+obj.bottomLeft3    = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_left3")
+obj.bottomCenter3  = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_center3")
+obj.bottomRight3   = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_right3")
 obj.maximize       = hs.fnutils.partial(obj.resizeCurrentWindow, "max", true)
 
 
@@ -433,6 +457,12 @@ function obj:bindHotkeys(mapping)
       top_right = self.topRight,
       bottom_left = self.bottomLeft,
       bottom_right = self.bottomRight,
+      top_left3 = self.topLeft3,
+      top_center3 = self.topCenter3,
+      top_right3 = self.topRight3,
+      bottom_left3 = self.bottomLeft3,
+      bottom_center3 = self.bottomCenter3,
+      bottom_right3 = self.bottomRight3,
       undo = self.undo,
       center = self.center,
       larger = self.larger,
