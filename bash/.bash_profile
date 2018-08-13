@@ -3,7 +3,6 @@
 alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
 export EDITOR=/usr/local/bin/vim
-alias gradlew='$HOME/Projects/stash/NEBULA/wrapper/gradlew'
 
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -21,18 +20,25 @@ pathprepend() {
 pathprepend "/usr/local/sbin"
 pathprepend "/usr/local/bin"
 
+# Java
 export JAVA8_HOME=$(/usr/libexec/java_home)
 export JAVA_HOME=$(/usr/libexec/java_home)
 pathappend $JAVA_HOME/bin
 
-
 pathappend $HOME/bin
-
 export PATH=$HOME/.local/bin:$PATH
+
+# Python
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
 
 # Scala
 export SCALA_HOME="/usr/local/share/scala"
 pathappend $SCALA_HOME/bin
+
+# Node
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 # Aliases
 alias less='less -R'
@@ -187,4 +193,6 @@ sourceifexists ~/.profile
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export BYOBU_PREFIX=/usr/local
 
+
+eval "$(pyenv virtualenv-init -)"
 
