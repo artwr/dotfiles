@@ -1,4 +1,4 @@
-. `brew --prefix`/etc/profile.d/z.sh
+#. `brew --prefix`/etc/profile.d/z.sh
 
 alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
@@ -94,7 +94,7 @@ export HISTFILE=~/.bash_eternal_history
 # Set iTerm2 tab titles
 function tabTitle() { echo -ne "\033]0;"$*"\007"; }
 
-# function cd() { builtin cd "$@"; tabTitle ${PWD##*/}; }
+function cd() { builtin cd "$@"; tabTitle ${PWD##*/}; }
 
 function prompt_command() {
     if [ $? -eq 0 ]; then # set an error string for the prompt, if applicable
