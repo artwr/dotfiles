@@ -4,6 +4,10 @@ alias vi=/usr/local/bin/vim
 alias vim=/usr/local/bin/vim
 export EDITOR=/usr/local/bin/vim
 
+alias ..='cd ..'
+alias ...='cd ../..'
+
+
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="${PATH:+"$PATH:"}$1"
@@ -28,13 +32,11 @@ pathappend $JAVA_HOME/bin
 pathappend $HOME/bin
 export PATH=$HOME/.local/bin:$PATH
 
-# Python
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 
 # Scala
-export SCALA_HOME="/usr/local/share/scala"
-pathappend $SCALA_HOME/bin
+#export SCALA_HOME="/usr/local/share/scala"
+#pathappend $SCALA_HOME/bin
 
 # Node
 export NVM_DIR="$HOME/.nvm"
@@ -92,7 +94,7 @@ export HISTFILE=~/.bash_eternal_history
 # Set iTerm2 tab titles
 function tabTitle() { echo -ne "\033]0;"$*"\007"; }
 
-function cd() { builtin cd "$@"; tabTitle ${PWD##*/}; }
+# function cd() { builtin cd "$@"; tabTitle ${PWD##*/}; }
 
 function prompt_command() {
     if [ $? -eq 0 ]; then # set an error string for the prompt, if applicable
@@ -176,13 +178,13 @@ function over {
 
 function lbv() {
     mkdir -p ~/Code/notes/logs
-    vim ~/Code/notes/logs/$(date '+%Y-%m-%d').md
+    [ -z "$1" ] && vim ~/Code/notes/logs/$(date '+%Y-%m-%d').md  || vim ~/Code/notes/logs/"$1".md
 }
 
 
 function lbs() {
     mkdir -p ~/Code/notes/logs
-    subl ~/Code/notes/logs/$(date '+%Y-%m-%d').md
+    [ -z "$1" ] && subl ~/Code/notes/logs/$(date '+%Y-%m-%d').md  || subl ~/Code/notes/logs/"$1".md
 }
 
 
@@ -194,5 +196,13 @@ sourceifexists ~/.profile
 export BYOBU_PREFIX=/usr/local
 
 
-eval "$(pyenv virtualenv-init -)"
+# Python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/awiedmer/.sdkman"
+[[ -s "/Users/awiedmer/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/awiedmer/.sdkman/bin/sdkman-init.sh"
