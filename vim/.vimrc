@@ -54,6 +54,8 @@ Plug 'wincent/command-t'
 Plug 'kien/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+Plug 'jceb/vim-orgmode'
+
 call plug#end()
 
 syntax on
