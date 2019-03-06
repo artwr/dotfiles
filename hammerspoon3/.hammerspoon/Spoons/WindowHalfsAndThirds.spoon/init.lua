@@ -87,7 +87,7 @@ obj.clear_cache_after_seconds = 60
 
 -- Internal terminology:
 -- `actions` are the things hotkeys are bound to and express a user desire (eg. `third_left`: move a third further left
---   than the current `window_state`). See the keys of obj._window_moves or the keys of action_to_method_map in 
+--   than the current `window_state`). See the keys of obj._window_moves or the keys of action_to_method_map in
 --   :bindHotkeys() for the available actions
 -- `window_states` are states a window may be currently in (eg. `left_third`: the leftmost horizontal third of the screen)
 -- sometimes `actions` and `window_states` share a name (eg. `left_half`)
@@ -120,10 +120,10 @@ obj._window_state_name_to_rect = {
    bottom_left    = {0.00,0.50,0.50,0.50},
    bottom_right   = {0.50,0.50,0.50,0.50},
    top_left3      = {0.00,0.00,0.33,0.50},
-   top_center3    = {0.33,0.00,0.33,0.50},
+   top_center3    = {0.33,0.00,0.34,0.50},
    top_right3     = {0.67,0.00,0.33,0.50},
    bottom_left3   = {0.00,0.50,0.33,0.50},
-   bottom_center3 = {0.33,0.50,0.33,0.50},
+   bottom_center3 = {0.33,0.50,0.34,0.50},
    bottom_right3  = {0.67,0.50,0.33,0.50},
    max            = {0.00,0.00,1.00,1.00},
 }
@@ -493,4 +493,3 @@ function obj.onethirdDown() obj.thirdDown() end
 
 
 return obj
-
