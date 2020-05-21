@@ -7,6 +7,8 @@ export EDITOR=/usr/local/bin/vim
 alias ..='cd ..'
 alias ...='cd ../..'
 
+export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
+
 
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -32,7 +34,8 @@ pathappend $JAVA_HOME/bin
 pathappend $HOME/bin
 export PATH=$HOME/.local/bin:$PATH
 
-
+# OpenSSL compiled curl `brew install curl-openssl`
+export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
 
 # Scala
 #export SCALA_HOME="/usr/local/share/scala"
@@ -148,7 +151,9 @@ export PROMPT_COMMAND=prompt_command
 # voilà!
 
 
-
+function dateint_add(){
+    gdate --date="$1 $2 day" +'%Y%m%d'
+}
 
 
 
@@ -206,3 +211,6 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/awiedmer/.sdkman"
 [[ -s "/Users/awiedmer/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/awiedmer/.sdkman/bin/sdkman-init.sh"
+# >>> XP ENV BEGIN >>>
+export PATH="/Users/awiedmer/xp-env/bin:$PATH"
+# <<< XP ENV END <<<
